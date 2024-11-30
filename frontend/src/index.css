@@ -15,6 +15,16 @@ body {
   width: 100vw;
 }
 
+.chat-messages {
+  height: 400px; /* Fixed height for the chat pane */
+  overflow-y: auto; /* Enable scrolling for overflow */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+
 /* Shared Gradient for Sidebar and Header */
 .shared-gradient {
   background: linear-gradient(135deg, #002244, #004479); /* Unified Gradient */

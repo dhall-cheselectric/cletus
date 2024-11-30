@@ -15,25 +15,32 @@ const Chat: React.FC = () => {
   const handleSend = async () => {
     if (!input.trim()) return;
 
+    // Add user's message to the chat pane
     const userMessage: Message = { sender: "user", text: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
 
     try {
-      const response = await fetch("/api/chat", {
+      // Send the input to the backend and get the response
+      const response = await fetch("http://127.0.0.1:8000/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ text: input }),
       });
 
+      // Extract the data from the response
       const data = await response.json();
+
+      // Add the bot's response to the chat pane
       const botMessage: Message = { sender: "bot", text: data.reply };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: "Something went wrong. Please try again." },
-      ]);
+      // Handle errors and display a fallback message
+      const errorMessage: Message = {
+        sender: "bot",
+        text: "Something went wrong. Please try again later.",
+      };
+      setMessages((prev) => [...prev, errorMessage]);
     }
   };
 
