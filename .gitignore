@@ -1,0 +1,17 @@
+# Node.js
+node_modules/
+dist/
+.env
+.venv
+
+# Python
+__pycache__/
+*.pyc
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# OS/System Files
+.DS_Store
+Thumbs.db
